@@ -1,6 +1,103 @@
-# VIPpocketAdm
+<h1 align="center">VIPocket Admin — Loyalty Analytics Dashboard</h1>
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.4.
+<p align="center">
+  <em>Providing small-business owners with the financial evidence to validate whether their loyalty programme is generating a measurable return</em>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Angular-20+-DD0031?style=for-the-badge&logo=angular&logoColor=white"/>
+  <img src="https://img.shields.io/badge/TypeScript-5+-3178C6?style=for-the-badge&logo=typescript&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Analytics-ROI%20Dashboard-4285F4?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/Companion-VIPocket-27AE60?style=for-the-badge"/>
+</p>
+
+---
+
+> Administrative analytics dashboard for the VIPpocket loyalty platform. Surfaces per-customer LTV, visit frequency, average ticket, cumulative discounts, and programme ROI — providing small-business owners with the financial evidence to validate whether their loyalty investment actually pays off.
+
+---
+
+## The Problem
+
+Loyalty programme operators have no visibility into whether the programme is profitable. They know they are giving discounts but cannot answer the fundamental question: are the customers who receive discounts spending more, visiting more frequently, and generating net positive revenue compared to the cost of the rewards? Without this data, the programme is an expense with an unknown return.
+
+---
+
+## The Solution
+
+An analytics dashboard that turns the visit and discount data collected by VIPpocket into actionable financial metrics. For each customer, the owner can see exactly how much revenue they generate, how often they visit, what the average ticket looks like, what the loyalty programme costs per customer, and — critically — whether the cost of the discount is justified by the revenue it drives.
+
+---
+
+## Methodology
+
+```
+VIPpocket (customer app)
+    └─► Records every visit + discount event per customer
+
+VIPpocket_adm (this repository)
+    └─► Aggregates visit history per customer
+             └─► Calculates financial metrics:
+                      ├─► LTV — total revenue from customer since registration
+                      ├─► Visit frequency — average days between visits
+                      ├─► Average ticket — revenue per visit
+                      ├─► Total discounts — cumulative rewards granted
+                      ├─► Opportunity cost — revenue "foregone" in discounts
+                      └─► Retention rate — % of customers who completed multiple cycles
+                               └─► Owner decision: continue, adjust, or discontinue programme
+```
+
+**Key metrics per customer:**
+
+| Metric | Description |
+|--------|-------------|
+| LTV | Total revenue generated since registration |
+| Visit frequency | Average days between visits |
+| Average ticket | Revenue per visit cycle |
+| Total discounts | Cumulative discount value granted |
+| Opportunity cost | Cost of the loyalty programme per customer |
+| Retention rate | Cycle completion rate — the loyalty signal |
+
+---
+
+## Results
+
+- Converts VIPpocket's visit data into a per-customer ROI model
+- Identifies high-value customers (frequent, high-ticket) vs. discount-only customers
+- Gives programme operators a data-driven basis to adjust discount thresholds or reward structures
+
+---
+
+## Tradeoffs
+
+| Decision | Chosen | Alternative | Rationale |
+|----------|--------|-------------|----------|
+| Data architecture | Per-device (reads VIPpocket local data) | Centralised backend with multi-device sync | No backend eliminates infrastructure cost and privacy risk; the tradeoff is that analytics are scoped to a single device — acceptable for a single-store operator |
+| Dashboard scope | 6 focused KPIs | Full BI dashboard (charts, cohorts, funnels) | A focused KPI set is immediately actionable for a small-business owner making daily pricing decisions; a full BI dashboard would overwhelm the target user and increase time-to-insight |
+| Update frequency | On-demand calculation | Real-time reactive updates | On-demand calculation is sufficient for a daily management review; real-time would require WebSocket infrastructure and drain battery on a mobile device used as the store's POS |
+| Data visualisation | Tables with exact numbers | Chart-first (bar, line, pie) | Shop owners need exact currency values to make discount threshold decisions — charts communicate trends but obscure the precise figures needed for ROI judgment |
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Frontend | Angular 20+, TypeScript, SCSS |
+| Architecture | Standalone components, OnPush, Signals |
+| Data source | VIPpocket (companion app) |
+| Deployment | GitHub Pages |
+
+---
+
+## Getting Started
+
+```bash
+npm install
+ng serve          # → http://localhost:4200/VIPpocket_adm
+```
+
+**Related repository:** [`VIPpocket`](https://github.com/wesleyzilva/VIPpocket) — the customer-facing loyalty card app
 Este projeto é a área administrativa do VIPpocket, focada em fornecer análises de viabilidade financeira para os estabelecimentos que utilizam a aplicação.
 
 ## Objetivo do Projeto
