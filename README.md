@@ -4,6 +4,27 @@
   <em>Providing small-business owners with the financial evidence to validate whether their loyalty programme is generating a measurable return</em>
 </p>
 
+> **Quickstart de sinergia com VIPpocket (cliente)**
+>
+> Os dois apps compartilham um "banco" mock via `localStorage` (chave `vippocket:db:v1`). Rodando no mesmo browser, **o que o adm carimba aparece imediatamente no cartão do cliente**.
+>
+> ```bash
+> # terminal 1 — cliente (porta 4200)
+> cd VIPpocket && npm install && npm start
+>
+> # terminal 2 — prestador (porta 4300)
+> cd VIPpocket_adm && npm install && npm start
+> ```
+>
+> 1. Abra `http://localhost:4200/qr-loyalty` (cliente) — copie o JSON exibido sob o QR.
+> 2. Abra `http://localhost:4300/login` (adm) → escolha o prestador demo → vá em **Carimbar** → cole o JSON → confirme.
+> 3. Volte à aba do cliente: o selo aparece automaticamente.
+>
+> Em produção, troque `LoyaltyStore` por um service HTTP que aponte para a mesma API REST nos dois repos.
+
+---
+
+
 <p align="center">
   <img src="https://img.shields.io/badge/Angular-20+-DD0031?style=for-the-badge&logo=angular&logoColor=white"/>
   <img src="https://img.shields.io/badge/TypeScript-5+-3178C6?style=for-the-badge&logo=typescript&logoColor=white"/>
